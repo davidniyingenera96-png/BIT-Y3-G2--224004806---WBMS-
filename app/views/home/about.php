@@ -1,0 +1,11 @@
+<div class="pagehead"><div class="secin"><h1>About Us</h1><p>Who we are, what we do and why it matters.</p></div></div>
+<section class="sec" id="about"><div class="secin"><span class="eyebrow">About Us</span><h2 class="sech">A clearer, fairer way to manage water billing</h2>
+<div class="about"><div><p>The <b>Water Bill Management System</b> is a web platform that helps a water service provider keep accurate customer records, capture meter readings, issue bills and record payments — all in one secure place.</p>
+<p><b>Our mission</b> is to make billing transparent: customers can see exactly how much water they used and what they owe, while staff and administrators work from a single, trusted record instead of scattered paperwork.</p>
+<ul class="who"><li><?= icon('users') ?><span><b>Customers</b> view their meter, bills, due dates and payment history.</span></li><li><?= icon('wrench') ?><span><b>Staff</b> register customers, record readings, generate bills and record payments.</span></li><li><?= icon('shield') ?><span><b>Administrators</b> oversee users, finances and system activity.</span></li></ul></div>
+<div class="values"><div><?= icon('gauge') ?><b>Accuracy</b><p>Usage is calculated from cumulative meter readings, and invalid readings are rejected.</p></div><div><?= icon('file') ?><b>Transparency</b><p>Every bill shows readings, rate, charges, tax and balance.</p></div><div><?= icon('lock') ?><b>Security</b><p>Role-based access, hashed passwords and an audit trail protect your data.</p></div><div><?= icon('check') ?><b>Reliability</b><p>Payments are never deleted — mistakes are voided and recorded.</p></div></div></div></div></section>
+
+<section class="stats"><div><?= icon('users') ?><b><?= number_format($customers) ?></b><span>Registered Customers</span></div><div><?= icon('file') ?><b><?= number_format($bills) ?></b><span>Bills Generated</span></div>
+<div><?= icon('check') ?><b><?= number_format($paid) ?></b><span>Paid Bills</span></div><div><?= icon('drop') ?><b><?= (int)$rate ?>%</b><span>Bills Paid</span></div></section>
+
+<section class="cta"><h3>Ready to get started?</h3><a class="btn sm" href="<?= url('auth/login') ?>">Login</a> <a class="btn sm ghost" href="<?= url('auth/register') ?>">Create account</a></section>

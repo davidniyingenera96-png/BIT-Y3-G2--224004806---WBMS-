@@ -1,0 +1,6 @@
+<?php if (!$c): ?><div class="alert error">No customer record is linked to your account.</div><?php return; endif; $last = $rows[0] ?? null; ?>
+<div class="head"><div><h1><?= icon('gauge') ?> Meter Info</h1><p class="muted">Your meter and recent readings.</p></div></div>
+<div class="cards"><div class="card-stat c-blue"><?= icon('gauge') ?>Meter No.<b><?= e($c['meter_no']) ?></b></div><div class="card-stat c-green">Latest Reading<b><?= $last ? e($last['meter_value']) : '—' ?></b><?= $last ? '<small>' . e($last['reading_date']) . '</small>' : '' ?></div>
+<div class="card-stat c-purple">Current Consumption<b><?= $last ? e($last['units_used']) : '—' ?></b><small>units since previous reading</small></div><div class="card-stat c-orange">Address<b class="sm"><?= e($c['address']) ?></b></div></div>
+<div class="panel"><h2>Reading history</h2><div class="tw"><table><tr><th>Date</th><th>Meter value</th><th>Units used</th></tr><?php foreach ($rows as $r): ?><tr><td><?= e($r['reading_date']) ?></td><td><?= e($r['meter_value']) ?></td><td><?= e($r['units_used']) ?></td></tr><?php endforeach; ?>
+<?php if (!$rows): ?><tr><td colspan="3" class="muted">No readings yet.</td></tr><?php endif; ?></table></div></div>

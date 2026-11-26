@@ -1,0 +1,12 @@
+<div class="head"><div><h1><?= icon('home') ?> Administrator Dashboard</h1><p class="muted">Welcome, <?= e($u['username']) ?>! Here is the system overview.</p></div></div>
+<div class="cards"><div class="card-stat c-blue"><?= icon('users') ?>Total Customers<b><?= (int)$customers ?></b></div><div class="card-stat c-green"><?= icon('file') ?>Total Bills<b><?= (int)$bills ?></b></div>
+<div class="card-stat c-orange"><?= icon('check') ?>Total Payments<b><?= (int)$payN ?></b></div><div class="card-stat c-purple"><?= icon('gauge') ?>Total Readings<b><?= (int)$readN ?></b></div></div>
+<div class="cards three"><div class="card-stat c-green"><?= icon('check') ?>Paid Bills<b><?= (int)$paidN ?></b></div><div class="card-stat c-orange"><?= icon('file') ?>Unpaid / Partial<b><?= (int)$openN ?></b></div><a class="card-stat c-blue" href="<?= url('reports') ?>"><?= icon('chart') ?>Monthly Billing Summary<b>→</b></a></div>
+<?php if ($pendingPay): ?><div class="alert error" role="alert"><?= (int)$pendingPay ?> customer payment(s) await confirmation. <a href="<?= url('payments', ['status' => 'Pending']) ?>">Review</a></div><?php endif; ?>
+<?php if ($overdue): ?><div class="alert error" role="alert"><?= (int)$overdue ?> unpaid bill(s) are past their due date. <a href="<?= url('bills', ['status' => 'Unpaid']) ?>">Review</a></div><?php endif; ?>
+<?php $max = max(array_merge([1], array_map(fn($r) => (float)$r['t'], $rev))); ?>
+<div class="grid2"><div class="panel"><h2>Monthly Revenue <small class="muted">(payments collected)</small></h2>
+<div class="chart"><div class="yax"><?php foreach ([1, .75, .5, .25, 0] as $t): ?><span><?= e(short($max * $t)) ?></span><?php endforeach; ?></div>
+<div class="bars"><?php foreach ($rev as $r): ?><div style="height:<?= max(2, round($r['t'] / $max * 100)) ?>%" title="<?= e(money($r['t'])) ?>"><span><?= e($r['m']) ?></span></div><?php endforeach; ?></div></div><?php if (!$rev): ?><p class="muted">No payments recorded yet.</p><?php endif; ?></div>
+<div class="panel"><h2>Recent Activities <a class="more" href="<?= url('reports/activity') ?>">View All →</a></h2><ul class="acts"><?php foreach ($acts as $a): $c = str_starts_with($a['action'], 'BILL') ? 'ok' : (str_starts_with($a['action'], 'PAYMENT') || $a['action'] === 'LOGIN' ? 'blue' : 'warn'); ?>
+<li><i class="dot <?= $c ?>"></i><span><?= e(ucfirst(strtolower(str_replace('_', ' ', $a['action'])))) ?><small class="muted"> <?= e($a['details']) ?></small></span><em><?= e(ago($a['created_at'])) ?></em></li><?php endforeach; ?></ul></div></div>

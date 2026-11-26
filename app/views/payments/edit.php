@@ -1,0 +1,6 @@
+<div class="head"><div><h1><?= icon('edit') ?> Edit Payment</h1><p class="muted"><?= e($p['full_name']) ?> · Meter <?= e($p['meter_no']) ?> · Bill <?= e($p['billing_month']) ?> · <?= e(money($p['amount_paid'])) ?></p></div><?= act_link('view', 'Back to payments', url('payments/index')) ?></div>
+<div class="panel narrow"><?php foreach ($errors as $x): ?><div class="alert error" role="alert"><?= e($x) ?></div><?php endforeach; ?><p class="muted">The amount cannot be changed. To fix a wrong amount, void this payment and record a new one.</p>
+<form method="post" action="<?= url('payments/update') ?>" data-validate><?= csrf_field() ?><input type="hidden" name="id" value="<?= (int)$p['payment_id'] ?>">
+<label for="pd">Payment date</label><input id="pd" type="date" name="payment_date" required max="<?= date('Y-m-d') ?>" value="<?= e($p['payment_date']) ?>">
+<label for="pm">Method</label><select id="pm" name="method" required><?php foreach (['Cash', 'Mobile Money', 'Bank Transfer', 'Card'] as $m): ?><option <?= $p['payment_method'] === $m ? 'selected' : '' ?>><?= $m ?></option><?php endforeach; ?></select>
+<label for="pr">Transaction reference</label><input id="pr" name="reference" maxlength="60" value="<?= e($p['transaction_reference']) ?>"><button class="btn"><?= icon('save') ?>Save changes</button></form></div>

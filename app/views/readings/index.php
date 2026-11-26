@@ -1,0 +1,14 @@
+<div class="head"><div><h1><?= icon('gauge') ?> Meter Readings</h1><p class="muted">Cumulative meter values; usage = current − previous accepted reading.</p></div></div>
+<div class="panel narrow"><h2>Record reading</h2><?php foreach ($errors as $x): ?><div class="alert error" role="alert"><?= e($x) ?></div><?php endforeach; ?>
+<form method="post" action="<?= url('readings/save') ?>" data-validate><?= csrf_field() ?>
+<label for="cu">Customer (previous reading shown)</label><select id="cu" name="customer_id" required><option value="">Select customer…</option>
+<?php foreach ($cust as $c): ?><option value="<?= (int)$c['customer_id'] ?>"><?= e($c['full_name'] . ' (' . $c['meter_no'] . ') — last: ' . ($c['last_value'] ?? 'none')) ?></option><?php endforeach; ?></select>
+<label for="d">Reading date</label><input id="d" type="date" name="reading_date" required max="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>">
+<label for="v">Current meter value</label><input id="v" type="number" step="0.01" min="0" name="meter_value" required><button class="btn"><?= icon('save') ?>Save reading</button></form></div>
+<div class="panel"><h2>Reading history</h2><form method="get" class="filter wrap"><input type="hidden" name="r" value="readings/index">
+<select name="cid" aria-label="Customer"><option value="0">All customers</option><?php foreach ($cust as $c): ?><option value="<?= (int)$c['customer_id'] ?>" <?= $f['cid'] === (int)$c['customer_id'] ? 'selected' : '' ?>><?= e($c['full_name'] . ' (' . $c['meter_no'] . ')') ?></option><?php endforeach; ?></select>
+<label for="rf">From</label><input id="rf" type="date" name="from" value="<?= e($f['from']) ?>"><label for="rt">To</label><input id="rt" type="date" name="to" value="<?= e($f['to']) ?>"><button class="btn sm">Filter</button><?php if ($f['cid'] || $f['from'] || $f['to']): ?><?= act_link('warn', 'Clear', url('readings/index')) ?><?php endif; ?></form>
+<div class="tw"><table><tr><th>Date</th><th>Customer</th><th>Meter</th><th>Value</th><th>Units</th><th>Reader</th><th>Actions</th></tr>
+<?php foreach ($rows as $r): $can = (int)$r['reading_id'] === (int)$r['latest_id'] && !(int)$r['billed']; ?><tr><td><?= e($r['reading_date']) ?></td><td><?= e($r['full_name']) ?></td><td><?= e($r['meter_no']) ?></td><td><?= e($r['meter_value']) ?></td><td><?= e($r['units_used']) ?></td><td><?= e($r['reader']) ?></td>
+<td class="acts2"><?php if ($can): ?><?= act_link('edit', 'Edit', url('readings/edit', ['id' => $r['reading_id']])) ?><?= act_form('del', 'Delete', 'readings/delete', ['id' => $r['reading_id']], 'Delete this reading?') ?><?php else: ?><span class="muted small"><?= (int)$r['billed'] ? 'Billed' : 'Locked' ?></span><?php endif; ?></td></tr><?php endforeach; ?>
+<?php if (!$rows): ?><tr><td colspan="7" class="muted">No readings found.</td></tr><?php endif; ?></table></div></div>

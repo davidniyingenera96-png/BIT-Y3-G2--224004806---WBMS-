@@ -1,0 +1,3 @@
+app/config/database.local.php
+.env
+*.log

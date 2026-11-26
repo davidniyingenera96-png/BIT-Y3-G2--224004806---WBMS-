@@ -1,0 +1,7 @@
+<div class="head"><div><h1><?= icon('wrench') ?> Staff Dashboard</h1><p class="muted">Manage meter readings and bills.</p></div></div>
+<?php if ($pendingPay): ?><div class="alert error" role="alert"><?= (int)$pendingPay ?> customer payment(s) await confirmation. <a href="<?= url('payments', ['status' => 'Pending']) ?>">Review</a></div><?php endif; ?>
+<div class="cards three"><a class="card-stat big c-blue" href="<?= url('readings') ?>"><?= icon('gauge') ?>Record<br>Meter Reading</a><a class="card-stat big c-green" href="<?= url('bills') ?>"><?= icon('file') ?>Generate<br>Bills</a><a class="card-stat big c-orange" href="<?= url('customers') ?>"><?= icon('users') ?>View<br>Customers</a></div>
+<div class="grid2"><div class="panel"><h2>Recent Meter Readings <a class="more" href="<?= url('readings') ?>">View All →</a></h2><div class="tw"><table><tr><th>Customer</th><th>Meter No</th><th>Date</th><th>Units</th></tr>
+<?php foreach ($readings as $r): ?><tr><td><?= e($r['full_name']) ?></td><td><?= e($r['meter_no']) ?></td><td><?= e($r['reading_date']) ?></td><td><?= e($r['units_used']) ?></td></tr><?php endforeach; ?></table></div></div>
+<div class="panel"><h2>Billing Summary</h2><div class="donutwrap"><div class="donut" style="background:conic-gradient(var(--ok) 0 <?= (int)$pct ?>%,var(--err) <?= (int)$pct ?>% 100%)"><div><b><?= (int)$pct ?>%</b>Paid</div></div>
+<ul class="legend"><li><i class="dot ok"></i>Paid</li><li><i class="dot err"></i>Unpaid / partial</li><li class="muted"><?= (int)$tot ?> bills</li></ul></div></div></div>
