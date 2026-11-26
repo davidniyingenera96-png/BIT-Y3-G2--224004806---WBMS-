@@ -1,7 +1,7 @@
 # Test Plan (SRS §11) — results must be recorded after execution
 | ID | Scenario | Steps | Expected | Actual | Status |
 |---|---|---|---|---|---|
-| TC-01 | Login valid | admin / Password@123 | Admin dashboard | _not executed_ | Pending |
+| TC-01 | Login valid | admin / David12@! | Admin dashboard | _not executed_ | Pending |
 | TC-02 | Wrong password | admin / wrong | Rejected, no session | _not executed_ | Pending |
 | TC-03 | Duplicate email register | meter MT-004, email jean@waterbill.test | Rejected | _not executed_ | Pending |
 | TC-04 | Create customer | Customers > Register | Saved and listed | _not executed_ | Pending |
