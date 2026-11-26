@@ -6,6 +6,7 @@ Optional DB credentials: `app/config/database.local.php` (see `database.php`). M
 **Demo accounts** (password `Password@123`): `admin`, `staff.alice`, `jean.paul` (customer). Change them before real use.
 **Roles & sidebars:** Admin - users, customers, readings, bills, payments, reports, messages, settings, profile. Staff - customers, readings, bills, payments, reports, profile. Customer - bills, payments, meter info, profile.
 **Settings (admin):** logo upload, site name, tagline, contact details, billing rules. **Customer payments:** submitted with a transaction reference, kept Pending until staff/admin confirm (no payment gateway).
+<img width="1682" height="267" alt="Screenshot 2026-11-20 170045" src="https://github.com/user-attachments/assets/e44793db-a124-4f77-8589-3e8aa830c207" />
 
 <img width="1902" height="1079" alt="Screenshot 2026-11-25 182903" src="https://github.com/user-attachments/assets/dd8f0234-0200-4899-85f2-ff1904a9037c" />
 
