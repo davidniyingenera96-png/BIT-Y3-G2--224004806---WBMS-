@@ -9,6 +9,7 @@ Optional DB credentials: `app/config/database.local.php` (see `database.php`). M
 <img width="1682" height="267" alt="Screenshot 2026-11-20 170045" src="https://github.com/user-attachments/assets/e44793db-a124-4f77-8589-3e8aa830c207" />
 
 <img width="1902" height="1079" alt="Screenshot 2026-11-25 182903" src="https://github.com/user-attachments/assets/dd8f0234-0200-4899-85f2-ff1904a9037c" />
+![Uploading Screenshot 2026-11-24 093445.png…]()
 
 
 <img width="1906" height="600" alt="Screenshot 2026-11-25 181906" src="https://github.com/user-attachments/assets/65e24497-ff29-4ddc-a779-edc94e1c916d" />
